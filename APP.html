@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .slider{
+            -webkit-appearance: none;  /* Override default CSS styles */
+             appearance: none;
+             width: 100%; /* Full-width */
+             height: 25px; /* Specified height */
+             background: #d3d3d3; /* Grey background */
+             outline: none; /* Remove outline */
+             opacity: 0.7; /* Set transparency (for mouse-over effects on hover)
+                    }
+        .FSBUTTON{
+            color: black;
+        }
+    </style>
+
+</head>
+<body id=BODY style="background: yellow">
+    <div class="slidecontainer">
+  <input type="range" min="1000" max="12000" value="10000" class="slider" id="myRange">
+    </div>
+    <div id="FSBUTTON">
+        <button type="button">fullscreen</button>
+    </div>
+    <p id="val">10000K</p>
+    <script>
+        var slider = document.getElementById("myRange")
+
+        slider.oninput=function(){
+            val.innerHTML=String(this.value).concat("K");
+            var x=this.value
+            var R = 267 + -0.0172 * x + 7.21E-06 * x ** 2 + -1.07E-09 * x ** 3 + 4.62E-14 * x ** 4;
+            var G = -14.9 + 0.0953 * x + -1.12E-05 * x ** 2 + 4.06E-10 * x ** 3;
+            var B = -149 + 0.115 * x + -1.03E-05 * x ** 2 + 2.94E-10 * x ** 3;
+        document.getElementById("BODY").style.background = "rgb(" + Math.floor(R) + "," + Math.floor(G) + "," + Math.floor(B) + ")";
+        }
+
+        var elem = document.getElementById("BODY");
+
+<!--        var B=document.getElementBYId("FSBUTTON");-->
+        FSBUTTON.onclick=function(){
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+            slider.style.display="block";
+            FSBUTTON.remove()
+            slider.remove()
+            val.remove()
+<!--            B.style.display="block";-->
+
+
+        }
+    </script>
+</body>
+</html>
+
+<!--
+R
+267 + -0.0172x + 7.21E-06x^2 + -1.07E-09x^3 + 4.62E-14x^4
+G
+-14.9 + 0.0953x + -1.12E-05x^2 + 4.06E-10x^3
+B
+-149 + 0.115x + -1.03E-05x^2 + 2.94E-10x^3
+
+-->
